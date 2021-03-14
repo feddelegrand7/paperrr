@@ -1,4 +1,21 @@
 
+#' Creates a Shiny actionButton styled with paperCSS
+#'
+#' @param inputId the input ID that will be used to access the butfon
+#' @param label the label of the button
+#' @param size the size of the button, either the 'default', 'small',
+#' 'large', 'block'. Defaults to 'default'.
+#' @param fill the color that will be used to fill the button
+#' @param outline_col the color of the outline of the button
+#' @param icon an optional icon() to appear on the button
+#' @param width the width of the button
+#' @param ... names attributes to be applied to the button
+#'
+#' @return a Shiny button styled with paperCSS
+#' @export
+#'
+#' @examples
+
 paper_button <- function(inputId,
                          label,
                          size = "default",
@@ -7,6 +24,14 @@ paper_button <- function(inputId,
                          icon = NULL,
                          width = NULL,
                          ...) {
+
+
+  if (!(size %in% c('default', 'small', 'large', 'block'))) {
+
+    stop("the 'size' parameter can take the following values:
+         'default', 'small', 'large', 'block'")
+
+  }
 
   # We create a Shiny Button
   p_button <- shiny::actionButton(
