@@ -26,11 +26,24 @@
 
 paper_progress <- function(progression,
                            label = paste0(progression,"%"),
-                           style = "primary") {
+                           style = "primary",
+                           striped = TRUE) {
+
+  striped <- if(striped) {
+    "striped"
+  } else {
+    NULL
+  }
 
   shiny::tags$div(class = "row",
     shiny::tags$div(class = "progress margin-bottom",
-      shiny::tags$div(class = paste0("bar ", style, " w-", progression), label)
+      shiny::tags$div(class = paste0("bar ",
+                                     striped,
+                                     " ",
+                                     style,
+                                     " w-",
+                                     progression),
+                      label)
     )
 
   )
