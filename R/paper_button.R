@@ -8,6 +8,7 @@ paper_button <- function(inputId,
                          width = NULL,
                          ...) {
 
+  # We create a Shiny Button
   p_button <- shiny::actionButton(
                       inputId,
                       label,
@@ -15,19 +16,10 @@ paper_button <- function(inputId,
                       width,
                       ...)
 
+  # We remove the styling from the button by removing the class attribute
   p_button$attribs$class <- NULL
 
-
-  if (size == "default") {
-
-    return(
-      tagList(
-        paper_dependency(),
-        p_button
-      )
-    )
-  }
-
+  # we transform the user input to the adequate class
   class_0 <- switch(size,
 
          "default" = "paper-btn",
@@ -36,6 +28,10 @@ paper_button <- function(inputId,
          "block"   = "btn-block",
 
          )
+
+  # below we add the fill and outline classes to the basic class
+
+  ############# fill and outline_col block #######################
 
   if (!is.null(fill) & is.null(outline_col)) {
 
@@ -56,8 +52,15 @@ paper_button <- function(inputId,
     class <- class_0
   }
 
+  ##############################################################
+
+  # We append the final attribute to the basic shiny button
+  # so that we get out paper attribute
+
   p_button_final <- shiny::tagAppendAttributes(p_button,
                                                class = class)
+
+  # Finally, we return the paper button with the paper.min.css
 
   return(
     tagList(
