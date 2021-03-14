@@ -3,6 +3,7 @@ paper_button <- function(inputId,
                          label,
                          size = "default",
                          fill = NULL,
+                         outline_col = NULL,
                          icon = NULL,
                          width = NULL,
                          ...) {
@@ -27,7 +28,7 @@ paper_button <- function(inputId,
     )
   }
 
-  class <- switch(size,
+  class_0 <- switch(size,
 
          "default" = "paper-btn",
          "large"   = "btn-large",
@@ -36,10 +37,27 @@ paper_button <- function(inputId,
 
          )
 
-  class_filled <- paste(class, paste0("btn-", fill))
+  if (!is.null(fill) & is.null(outline_col)) {
+
+    class <- paste(class_0, paste0("btn-", fill))
+
+  } else if (!is.null(outline_col) & is.null(fill)) {
+
+    class <- paste(class_0, paste0("btn-",
+                                 outline_col,
+                                 "-outline"))
+
+  } else if (!is.null(outline_col) & !is.null(fill)) {
+
+    stop("one of 'fill' or 'outline_col' must be NULL")
+
+  } else {
+
+    class <- class_0
+  }
 
   p_button_final <- shiny::tagAppendAttributes(p_button,
-                                               class = class_filled)
+                                               class = class)
 
   return(
     tagList(
