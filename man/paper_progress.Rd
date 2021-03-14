@@ -4,7 +4,12 @@
 \alias{paper_progress}
 \title{Title}
 \usage{
-paper_progress(progression, style = "primary")
+paper_progress(
+  progression,
+  label = paste0(progression, "\%"),
+  style = "primary",
+  striped = TRUE
+)
 }
 \arguments{
 \item{style}{}
